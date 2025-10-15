@@ -1,4 +1,3 @@
-// lib/api.ts
 import axios, {AxiosError, AxiosRequestConfig} from 'axios';
 import {useAuthStore} from '@/store/useAuthStore';
 

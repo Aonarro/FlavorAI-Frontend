@@ -20,7 +20,6 @@ const MyRecipesTemplate = () => {
                 clearRecipes();
             });
 
-        // очищаем при размонтировании
         return () => clearRecipes();
     }, [user?.id, setRecipes, clearRecipes]);
 

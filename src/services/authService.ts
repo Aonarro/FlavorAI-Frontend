@@ -1,9 +1,9 @@
 import { useAuthStore } from '@/store/useAuthStore';
 import { api } from '@/lib/api';
-import { RegisterPayload } from "@/types/auth";
+import {LoginPayload, RegisterPayload} from "@/types/auth";
 import {AxiosError} from "axios";
 
-export async function login(userData: RegisterPayload) {
+export async function login(userData: LoginPayload) {
     const { setUser } = useAuthStore.getState();
 
     try {
@@ -78,9 +78,5 @@ export async function signOut() {
         console.error('Logout error:', err);
     } finally {
         logout();
-
-        // if (typeof window !== 'undefined') {
-        //     window.location.href = '/login';
-        // }
     }
 }

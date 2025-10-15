@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useAuthStore} from '@/store/useAuthStore';
 import {fetchUser} from '@/services/authService';
 import {usePathname, useRouter} from 'next/navigation';

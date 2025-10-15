@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Recipe App — Test Task
+
+A simple and elegant recipe management application built with **Next.js**, **TypeScript**, and **TailwindCSS**. Users can register, create and manage recipes, browse public ones, and rate their favorites.
+
+---
+
+## Features
+
+- User authentication (Login / Register)
+- Create, view, and manage personal recipes
+- Browse all public recipes
+- Search recipes by name
+- Protected routes for authenticated users
+- Responsive UI with **shadcn/ui** and **TailwindCSS**
+- Rate recipes with a modal interface
+- Toast notifications via **Sonner**
+- Component architecture based on **Atomic Design**
+
+
+---
+
+## Tech Stack
+
+- **Next.js 15 (App Router)**
+- **TypeScript**
+- **Zustand** for state management
+- **React Hook Form** for form validation
+- **Axios** for API communication
+- **shadcn/ui** + **TailwindCSS** for styling
+- **Sonner** for toast notifications
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Aonarro/FlavorAI-Frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Clone the repository
+```bash
+npm install
+```
+### 3. Configure environment variable
+NEXT_PUBLIC_API_URL='http://localhost:8080'
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Run the development server
+```bash
+npm run dev
+```

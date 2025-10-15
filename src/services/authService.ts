@@ -1,47 +1,86 @@
 import { useAuthStore } from '@/store/useAuthStore';
-import {api} from "@/lib/api";
+import { api } from '@/lib/api';
+import { RegisterPayload } from "@/types/auth";
+import {AxiosError} from "axios";
 
-export async function login(email: string, password: string) {
-    const setUser = useAuthStore.getState().setUser;
+export async function login(userData: RegisterPayload) {
+    const { setUser } = useAuthStore.getState();
 
     try {
         const { data } = await api.post(
             '/auth/login',
-            { email, password },
+            {
+                email: userData.email,
+                password: userData.password
+            },
             { withCredentials: true }
         );
 
         setUser(data.user, data.accessToken);
-
         return data.user;
     } catch (err) {
-        console.error(err);
+        console.error('Login error:', err);
+        throw err;
+    }
+}
+
+export async function register(userData: RegisterPayload) {
+    const { setUser } = useAuthStore.getState();
+
+    try {
+        const { data } = await api.post(
+            '/auth/register',
+            {
+                email: userData.email,
+                password: userData.password,
+                firstName: userData.firstName,
+                lastName: userData.lastName
+            },
+            { withCredentials: true }
+        );
+
+        setUser(data.user, data.accessToken);
+        return data.user;
+    } catch (err) {
+        console.error('Register error:', err);
         throw err;
     }
 }
 
 export async function fetchUser() {
-    const setUser = useAuthStore.getState().setUser;
+    const { setUser, user, logout } = useAuthStore.getState();
+
+    if (user) {
+        return user;
+    }
 
     try {
-        const { data } = await api.get('/auth/me', {
-            withCredentials: true,
-        });
-
+        const { data } = await api.get('/auth/me');
         setUser(data);
-
         return data;
     } catch (err) {
-        setUser(null);
-        return null;
+        if (err instanceof AxiosError && err.response?.status === 401) {
+            logout()
+            return null;
+        }
+
+        console.error('Fetch user error:', err);
+        logout()
+        throw err;
     }
 }
 
-export async function logout() {
+export async function signOut() {
     const { logout } = useAuthStore.getState();
     try {
         await api.post('/auth/logout', {}, { withCredentials: true });
+    } catch (err) {
+        console.error('Logout error:', err);
     } finally {
         logout();
+
+        // if (typeof window !== 'undefined') {
+        //     window.location.href = '/login';
+        // }
     }
 }

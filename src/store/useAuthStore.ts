@@ -14,6 +14,10 @@ interface AuthState {
     accessToken: string | null;
     setUser: (user: User | null, token?: string) => void;
     logout: () => void;
+    isAuthChecked: boolean;
+    setAuthChecked: (checked: boolean) => void;
+    setAccessToken: (token: string | null) => void;
+
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -24,4 +28,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         accessToken: token || null
     }),
     logout: () => set({user: null, accessToken: null}),
+    isAuthChecked: false,
+    setAuthChecked: (checked) => set({ isAuthChecked: checked }),
+    setAccessToken: (token) => set({ accessToken: token }),
 }));
